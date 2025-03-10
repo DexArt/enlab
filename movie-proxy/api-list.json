@@ -1,0 +1,515 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/mdb": {
+      "post": {
+        "operationId": "MdbController_getMovies",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MdbRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "List of movies",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MdbResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request"
+          }
+        },
+        "tags": [
+          "Mdb"
+        ]
+      }
+    },
+    "/mdb/details": {
+      "post": {
+        "operationId": "MdbController_getMovieById",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MdbDetailsRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Movie details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MdbMovieDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Movie not found"
+          }
+        },
+        "tags": [
+          "Mdb"
+        ]
+      }
+    }
+  },
+  "info": {
+    "title": "Movie API",
+    "description": "API for fetching movie details and lists",
+    "version": "1.0",
+    "contact": {}
+  },
+  "tags": [],
+  "servers": [],
+  "components": {
+    "schemas": {
+      "MdbRequestDto": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "Search query for movies",
+            "example": "Avengers"
+          },
+          "page": {
+            "type": "number",
+            "description": "Page number for pagination",
+            "example": 1,
+            "default": 1
+          }
+        }
+      },
+      "MdbMovie": {
+        "type": "object",
+        "properties": {
+          "adult": {
+            "type": "boolean",
+            "description": "Indicates if the movie is for adult audiences",
+            "example": false
+          },
+          "backdrop_path": {
+            "type": "string",
+            "description": "Backdrop image path",
+            "example": "/path/to/backdrop.jpg"
+          },
+          "genre_ids": {
+            "description": "List of genre IDs associated with the movie",
+            "example": [
+              28,
+              12,
+              16
+            ],
+            "type": "array",
+            "items": {
+              "type": "number"
+            }
+          },
+          "id": {
+            "type": "number",
+            "description": "Movie ID",
+            "example": 12345
+          },
+          "original_language": {
+            "type": "string",
+            "description": "Original language of the movie",
+            "example": "en"
+          },
+          "original_title": {
+            "type": "string",
+            "description": "Original title of the movie",
+            "example": "Avengers: Endgame"
+          },
+          "overview": {
+            "type": "string",
+            "description": "Movie overview",
+            "example": "After the devastating events of Avengers: Infinity War..."
+          },
+          "popularity": {
+            "type": "number",
+            "description": "Popularity score of the movie",
+            "example": 100.5
+          },
+          "poster_path": {
+            "type": "string",
+            "description": "Poster image path",
+            "example": "/path/to/poster.jpg"
+          },
+          "release_date": {
+            "type": "string",
+            "description": "Release date of the movie",
+            "example": "2019-04-26"
+          },
+          "title": {
+            "type": "string",
+            "description": "Title of the movie",
+            "example": "Avengers: Endgame"
+          },
+          "video": {
+            "type": "boolean",
+            "description": "Indicates if the movie has a video",
+            "example": false
+          },
+          "vote_average": {
+            "type": "number",
+            "description": "Average vote score",
+            "example": 8.5
+          },
+          "vote_count": {
+            "type": "number",
+            "description": "Total number of votes",
+            "example": 15000
+          }
+        },
+        "required": [
+          "adult",
+          "backdrop_path",
+          "genre_ids",
+          "id",
+          "original_language",
+          "original_title",
+          "overview",
+          "popularity",
+          "poster_path",
+          "release_date",
+          "title",
+          "video",
+          "vote_average",
+          "vote_count"
+        ]
+      },
+      "MdbResponseDto": {
+        "type": "object",
+        "properties": {
+          "page": {
+            "type": "number",
+            "description": "Current page number",
+            "example": 1
+          },
+          "results": {
+            "description": "List of movies",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MdbMovie"
+            }
+          },
+          "total_pages": {
+            "type": "number",
+            "description": "Total number of pages",
+            "example": 10
+          },
+          "total_results": {
+            "type": "number",
+            "description": "Total number of results",
+            "example": 100
+          }
+        },
+        "required": [
+          "page",
+          "results",
+          "total_pages",
+          "total_results"
+        ]
+      },
+      "MdbDetailsRequestDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "description": "Movie ID",
+            "example": 12345
+          }
+        },
+        "required": [
+          "id"
+        ]
+      },
+      "MdbGenre": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "description": "Genre ID",
+            "example": 11
+          },
+          "name": {
+            "type": "string",
+            "description": "Genre name",
+            "example": "Action"
+          }
+        },
+        "required": [
+          "id",
+          "name"
+        ]
+      },
+      "MdbProductionCompany": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "description": "Company ID",
+            "example": 12345
+          },
+          "name": {
+            "type": "string",
+            "description": "Company name",
+            "example": "Marvel Studios"
+          },
+          "logo_path": {
+            "type": "object",
+            "description": "Logo image path",
+            "example": "/path/to/logo.png",
+            "nullable": true
+          },
+          "origin_country": {
+            "type": "string",
+            "description": "Origin country",
+            "example": "US"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "logo_path",
+          "origin_country"
+        ]
+      },
+      "MdbProductionCountry": {
+        "type": "object",
+        "properties": {
+          "iso_3166_1": {
+            "type": "string",
+            "description": "ISO 3166-1 country code",
+            "example": "US"
+          },
+          "name": {
+            "type": "string",
+            "description": "Country name",
+            "example": "United States of America"
+          }
+        },
+        "required": [
+          "iso_3166_1",
+          "name"
+        ]
+      },
+      "MdbSpokenLanguage": {
+        "type": "object",
+        "properties": {
+          "iso_639_1": {
+            "type": "string",
+            "description": "ISO 639-1 language code",
+            "example": "en"
+          },
+          "name": {
+            "type": "string",
+            "description": "Language name",
+            "example": "English"
+          }
+        },
+        "required": [
+          "iso_639_1",
+          "name"
+        ]
+      },
+      "MdbMovieDetails": {
+        "type": "object",
+        "properties": {
+          "adult": {
+            "type": "boolean",
+            "description": "Indicates if the movie is for adult audiences",
+            "example": false
+          },
+          "backdrop_path": {
+            "type": "string",
+            "description": "Backdrop image path",
+            "example": "/path/to/backdrop.jpg"
+          },
+          "genre_ids": {
+            "description": "List of genre IDs associated with the movie",
+            "example": [
+              28,
+              12,
+              16
+            ],
+            "type": "array",
+            "items": {
+              "type": "number"
+            }
+          },
+          "id": {
+            "type": "number",
+            "description": "Movie ID",
+            "example": 12345
+          },
+          "original_language": {
+            "type": "string",
+            "description": "Original language of the movie",
+            "example": "en"
+          },
+          "original_title": {
+            "type": "string",
+            "description": "Original title of the movie",
+            "example": "Avengers: Endgame"
+          },
+          "overview": {
+            "type": "string",
+            "description": "Movie overview",
+            "example": "After the devastating events of Avengers: Infinity War..."
+          },
+          "popularity": {
+            "type": "number",
+            "description": "Popularity score of the movie",
+            "example": 100.5
+          },
+          "poster_path": {
+            "type": "string",
+            "description": "Poster image path",
+            "example": "/path/to/poster.jpg"
+          },
+          "release_date": {
+            "type": "string",
+            "description": "Release date of the movie",
+            "example": "2019-04-26"
+          },
+          "title": {
+            "type": "string",
+            "description": "Title of the movie",
+            "example": "Avengers: Endgame"
+          },
+          "video": {
+            "type": "boolean",
+            "description": "Indicates if the movie has a video",
+            "example": false
+          },
+          "vote_average": {
+            "type": "number",
+            "description": "Average vote score",
+            "example": 8.5
+          },
+          "vote_count": {
+            "type": "number",
+            "description": "Total number of votes",
+            "example": 15000
+          },
+          "belongs_to_collection": {
+            "type": "object",
+            "description": "Collection the movie belongs to",
+            "example": "Avengers Collection",
+            "nullable": true
+          },
+          "budget": {
+            "type": "number",
+            "description": "Movie budget",
+            "example": 356000000
+          },
+          "genres": {
+            "description": "List of genres",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MdbGenre"
+            }
+          },
+          "homepage": {
+            "type": "object",
+            "description": "Movie homepage",
+            "example": "https://www.marvel.com/movies/avengers-endgame",
+            "nullable": true
+          },
+          "imdb_id": {
+            "type": "string",
+            "description": "IMDB ID",
+            "example": "tt4154796"
+          },
+          "production_companies": {
+            "description": "List of production companies",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MdbProductionCompany"
+            }
+          },
+          "production_countries": {
+            "description": "List of production countries",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MdbProductionCountry"
+            }
+          },
+          "revenue": {
+            "type": "number",
+            "description": "Movie revenue",
+            "example": 2797800564
+          },
+          "runtime": {
+            "type": "number",
+            "description": "Movie runtime in minutes",
+            "example": 181
+          },
+          "spoken_languages": {
+            "description": "List of spoken languages",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MdbSpokenLanguage"
+            }
+          },
+          "status": {
+            "type": "string",
+            "description": "Movie status",
+            "example": "Released"
+          },
+          "tagline": {
+            "type": "object",
+            "description": "Movie tagline",
+            "example": "Part of the journey is the end.",
+            "nullable": true
+          }
+        },
+        "required": [
+          "adult",
+          "backdrop_path",
+          "genre_ids",
+          "id",
+          "original_language",
+          "original_title",
+          "overview",
+          "popularity",
+          "poster_path",
+          "release_date",
+          "title",
+          "video",
+          "vote_average",
+          "vote_count",
+          "belongs_to_collection",
+          "budget",
+          "genres",
+          "homepage",
+          "imdb_id",
+          "production_companies",
+          "production_countries",
+          "revenue",
+          "runtime",
+          "spoken_languages",
+          "status",
+          "tagline"
+        ]
+      }
+    }
+  }
+}
