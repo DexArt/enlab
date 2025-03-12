@@ -32,11 +32,12 @@ stop_servers() {
 }
 
 # Build and run the NestJS backend (movie-proxy)
-echo "Building and running NestJS backend..."
-cd movie-proxy || handle_error "Failed to navigate to movie-proxy directory"
 
 # Install dependencies
-yarn || handle_error "Failed to install dependencies for movie-proxy"
+yarn || handle_error "Failed to install dependencies for movie-proxy and frontend"
+
+echo "Building and running NestJS backend..."
+cd movie-proxy || handle_error "Failed to navigate to movie-proxy directory"
 
 # Build the NestJS app
 yarn build || handle_error "Failed to build movie-proxy"
@@ -63,8 +64,6 @@ cd ..
 echo "Building and running React frontend..."
 cd frontend || handle_error "Failed to navigate to frontend directory"
 
-# Install dependencies
-yarn || handle_error "Failed to install dependencies for frontend"
 
 # Generate API client
 yarn generate || handle_error "Failed to generate API client"
