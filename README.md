@@ -1,6 +1,8 @@
 # enlab
 Entain test task
 
+## Used Node v22.14.0
+
 ## Installation
 
 ```
