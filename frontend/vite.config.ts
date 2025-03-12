@@ -1,7 +1,11 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
+import {ConfigEnv, defineConfig, UserConfig} from "vite";
+import {buildViteConfig} from "./config/build/vite/buildViteConfig";
+import {BuildViteMode} from "./config/build/vite/types/types";
 
-// https://vite.dev/config/
-export default defineConfig({
-  plugins: [react()],
-})
+export default defineConfig((config: ConfigEnv): UserConfig => {
+  const isDev =
+      (config.mode as BuildViteMode) === ("development" as BuildViteMode);
+  const modeEnv =
+      (config.mode as BuildViteMode) || ("development" as BuildViteMode);
+  return buildViteConfig({ mode: modeEnv, isDev });
+});

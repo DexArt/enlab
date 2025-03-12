@@ -1,0 +1,15 @@
+.button {
+  color: var(--primary-action-text);
+  background: var(--primary-action);
+  cursor: pointer;
+  border-radius: 8px;
+  border: none;
+  padding: 12px;
+
+  &:disabled {
+    background: var(--background-light);
+    opacity: 0.2;
+    color: var(--text-secondary);
+    cursor: not-allowed;
+  }
+}

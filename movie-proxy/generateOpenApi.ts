@@ -18,7 +18,7 @@ async function generateSwagger() {
     const document = SwaggerModule.createDocument(app, config);
 
     // Define the output file path
-    const outputFilePath = './target/api-list.json';
+    const outputFilePath = '../frontend/target/api-list.json';
 
     // Ensure the directory exists
     const outputDir = dirname(outputFilePath);

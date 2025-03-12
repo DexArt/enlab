@@ -1,0 +1,33 @@
+.movies-page {
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+
+  &__header {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    background-color: var(--background-base);
+    padding: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+
+    &__logo {
+      img {
+        width: 150px;
+      }
+    }
+
+    @media screen and (max-width: 400px) {
+      flex-direction: column;
+    }
+  }
+
+  &__error {
+    color: var(--text-primary);
+  }
+}

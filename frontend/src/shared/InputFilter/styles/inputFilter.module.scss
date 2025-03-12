@@ -1,0 +1,26 @@
+.input-filter {
+  padding: 12px;
+  width: fit-content;
+  border-radius: 8px;
+  background: var(--background-normal);
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+
+    &__label {
+      color: var(--text-primary);
+      font-size: 1rem;
+    }
+
+    input {
+      text-overflow: ellipsis;
+      border: none;
+      background: none;
+      color: var(--text-primary);
+      font-size: 1rem;
+      width: 100%;
+      &:focus-visible{
+        outline: none;
+      }
+    }
+}

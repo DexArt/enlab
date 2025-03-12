@@ -1,0 +1,26 @@
+{
+  "name": "enlab",
+  "version": "1.0.0",
+  "description": "Entain test task",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DexArt/enlab.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/DexArt/enlab/issues"
+  },
+  "homepage": "https://github.com/DexArt/enlab#readme",
+  "workspaces": [
+    "movie-proxy",
+    "frontend"
+  ],
+  "private": true
+}

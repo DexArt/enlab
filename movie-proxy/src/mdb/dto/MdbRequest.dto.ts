@@ -7,7 +7,6 @@ export class MdbRequestDto {
         description: 'Search query for movies',
         example: 'Avengers',
     })
-    @IsNotEmpty({message: 'Query is required'})
     @IsString({message: 'Query must be a string'})
     query: string;
 
