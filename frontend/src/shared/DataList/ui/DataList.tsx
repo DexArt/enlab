@@ -14,9 +14,11 @@ interface dataListProps<T extends object> {
 
 export const DataList = <T extends object>(props: dataListProps<T>):ReactNode => {
 
+    const { data,loading,currentPage,totalPages,onPageChange,itemsPerPage,renderRow } = props;
+
 
     const getContent = useCallback(() => {
-        if(!props.data.length && !props.loading) {
+        if(!data.length && !loading) {
             return (
                 <div className={styles["paginated-list__no-content"]}>
                     No Data Found
@@ -26,36 +28,36 @@ export const DataList = <T extends object>(props: dataListProps<T>):ReactNode =>
 
         return (
             <ul className={styles["paginated-list__items"]}>
-                {props.loading && Array.from({length: props.itemsPerPage}).map((_, index) => (
+                {loading && Array.from({length: itemsPerPage}).map((_, index) => (
                     <li key={index} className={styles["paginated-list__item"]}>
-                        {props.renderRow(null, props.loading)}
+                        {renderRow(null, loading)}
                     </li>
                 ))}
-                {!props.loading && props.data.map((item, index) => (
+                {!loading && data.map((item, index) => (
                     <li key={index} className={styles["paginated-list__item"]}>
-                        {props.renderRow(item, props.loading)}
+                        {renderRow(item, loading)}
                     </li>
                 ))}
             </ul>
         )
-    },[props.data,props.loading])
+    },[data,loading])
 
     return (
         <div className={styles["paginated-list"]}>
             {getContent()}
             <div className={styles['paginated-list__pagination']}>
                 <Button
-                    disabled={props.currentPage === 1}
-                    onClick={() => props.onPageChange(props.currentPage - 1)}
+                    disabled={currentPage === 1}
+                    onClick={() => onPageChange(currentPage - 1)}
                 >
                     Previous
                 </Button>
                 <span>
-                    {props.currentPage} / {props.totalPages}
+                    {currentPage} / {totalPages}
                 </span>
                 <Button
-                    disabled={props.currentPage >= props.totalPages}
-                    onClick={() => props.onPageChange(props.currentPage + 1)}
+                    disabled={currentPage >= totalPages}
+                    onClick={() => onPageChange(currentPage + 1)}
                 >
                     Next
                 </Button>
