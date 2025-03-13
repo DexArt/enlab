@@ -14,7 +14,6 @@ export const MoviesReducers = {
         state.movies.response = action.payload;
         state.movies.totalPages = Math.ceil(action.payload.total_results / state.movies.moviesPerPage);
         state.movies.pagedMovies = [...state.movies.pagedMovies, ...[action.payload.results.slice(0, state.movies.moviesPerPage),action.payload.results.slice(state.movies.moviesPerPage)]];
-        state.movies.loading = false;
     },
     setQuery(state: MdbStateSchema, action: PayloadAction<string>) {
         state.movies.request.query = action.payload;

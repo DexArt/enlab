@@ -23,7 +23,6 @@ const initialState: MdbStateSchema = {
         error: null,
         loading: false,
     },
-    movieDetails: null,
 };
 
 const mdbSlice = createSlice({

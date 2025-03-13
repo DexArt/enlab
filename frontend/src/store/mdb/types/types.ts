@@ -1,4 +1,4 @@
-import {MdbMovie, MdbMovieDetails, MdbRequestDto, MdbResponseDto} from "api";
+import {MdbMovie, MdbRequestDto, MdbResponseDto} from "api";
 
 export interface MdbStateSchema {
     movies: {
@@ -11,5 +11,4 @@ export interface MdbStateSchema {
         error: Error | null,
         loading: boolean,
     },
-    movieDetails: MdbMovieDetails | null,
 }
