@@ -26,7 +26,7 @@ yarn build
 yarn start
 ```
 
-Frontend (NB frontend must be builded and ran after Nest Js App)
+Frontend (NB! Nest Js App first)
 
 ```
 cd frontend
