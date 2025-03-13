@@ -11,7 +11,7 @@ export const useQueryParam = (key: string, defaultValue: string = ''): [string, 
         } else {
             newSearchParams.delete(key);
         }
-        setSearchParams(newSearchParams);
+        setSearchParams(newSearchParams, { replace: true });
     };
 
     return [value, setValue];

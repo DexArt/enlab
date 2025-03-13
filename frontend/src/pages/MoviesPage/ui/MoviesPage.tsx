@@ -1,4 +1,4 @@
-import {FC, useEffect} from "react";
+import {FC, useEffect, useLayoutEffect, useRef} from "react";
 import {InputFilter} from "shared/InputFilter";
 import {DataList} from "shared/DataList";
 import {useAppDispatch, useAppSelector} from "store/store";
@@ -15,18 +15,26 @@ interface MoviesPageProps {}
 export const MoviesPage:FC<MoviesPageProps> = () => {
     const {pagedMovies, currentPage,totalPages,error,moviesPerPage,request,loading} = useAppSelector(state => state.mdb.movies);
     const dispatch = useAppDispatch();
+    const [queryParams, setQueryParams] = useQueryParams("query",request.query);
     const [inputValue, debouncedValue, setInputValue] = useDebouncedInput(request.query,300);
-    const [queryParams, setQueryParams] = useQueryParams("query","");
 
-    useEffect(() => {
+    const isInitialRender = useRef(true);
+
+    useLayoutEffect(() => {
         if(queryParams) {
             setInputValue(queryParams);
         }
-    }, [queryParams]);
+    }, []);
 
     useEffect(() => {
         dispatch(setQuery(debouncedValue));
-        setQueryParams(debouncedValue);
+
+        //Skip query set on initial render
+        if (isInitialRender.current) {
+            isInitialRender.current = false;
+        } else {
+            setQueryParams(debouncedValue);
+        }
     }, [debouncedValue]);
 
     useEffect(() => {
