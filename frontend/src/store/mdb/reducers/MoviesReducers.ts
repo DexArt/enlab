@@ -16,11 +16,14 @@ export const MoviesReducers = {
         state.movies.pagedMovies = [...state.movies.pagedMovies, ...[action.payload.results.slice(0, state.movies.moviesPerPage),action.payload.results.slice(state.movies.moviesPerPage)]];
     },
     setQuery(state: MdbStateSchema, action: PayloadAction<string>) {
-        state.movies.request.query = action.payload;
-        state.movies.currentPage = 1;
-        state.movies.request.page = 1;
-        state.movies.pagedMovies = [];
-        state.movies.error = null;
+
+        if(state.movies.request.query !== action.payload) {
+            state.movies.currentPage = 1;
+            state.movies.request.page = 1;
+            state.movies.request.query = action.payload;
+            state.movies.pagedMovies = [];
+            state.movies.error = null;
+        }
     },
     setCurrentPage(state: MdbStateSchema, action: PayloadAction<number>) {
         state.movies.currentPage = action.payload;
